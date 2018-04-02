@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Page</title>
+</head>
+<body>
+<form action="{% url 'LJNDjango:edit_action' %}" method="post">
+    {#    禁止访问 (403) CSRF验证失败. 请求被中断. POST请求的表达++++  #}
+    {% csrf_token %}
+    {% comment %}{% if  article %}
+        <input type="hidden" name="article_id" value="{{ article.id }}">
+        <label>文章标题
+            <input type="text" name="title" value="{{ article.title }}">
+        </label>
+        <br>
+
+        <label>文章内容
+            <input type="text" name="content" value="{{ article.content }}">
+        </label>
+        <br>
+    {% else %}
+        <input type="hidden" name="article_id" value="0">
+        <label>文章标题
+            <input type="text" name="title">
+        </label>
+        <br>
+
+        <label>文章内容
+            <input type="text" name="content">
+        </label>
+        <br>
+    {% endif %}{% endcomment %}
+{#     模板过滤器#}
+    <input type="hidden" name="article_id" value="{{ article.id | default:'0' }}">
+    <label>文章标题
+        <input type="text" name="title" value="{{ article.title }}">
+    </label>
+    <br>
+
+    <label>文章内容
+        <input type="text" name="content" value="{{ article.content }}">
+    </label>
+    <br>
+
+
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
